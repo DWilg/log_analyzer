@@ -1,9 +1,0 @@
-2025-12-01 10:00:00 INFO System started
-2025-12-01 10:01:00 WARNING Low disk space
-2025-12-01 10:02:00 ERROR Disk failure
-2025-12-01 10:03:00 INFO User login
-2025-12-01 10:04:00 ERROR Network timeout
-2025-12-01 10:05:00 WARNING High memory usage
-2025-12-01 10:06:00 INFO System check
-2025-12-01 10:07:00 ERROR CPU overheating
-2025-12-01 10:08:00 INFO System shutdown
