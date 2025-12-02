@@ -40,7 +40,7 @@ def stats_per_hour(lines, word):
     for line in lines:
         parsed = parse_log_line(line)
         if parsed and word in line:
-            hour = parsed['datetime'][:13]  # YYYY-MM-DD HH
+            hour = parsed['datetime'][:13]  
             stats[hour] += 1
     return stats
 
