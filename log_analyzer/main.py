@@ -52,6 +52,8 @@ def main():
         results['CUDA'] = (elapsed, counter)
 
     if args.mode == 'all':
+        import os
+        from utils import plot_throughput, plot_cpu_gpu_comparison
         import matplotlib.pyplot as plt
         techs = []
         times = []
@@ -67,6 +69,17 @@ def main():
             plt.xlabel('Technologia')
             plt.savefig('execution_time_comparison.png')
             print("[ALL] Wygenerowano wykres porównawczy: execution_time_comparison.png")
+
+            # --- Wykres przepustowości GB/s ---
+            file_size = os.path.getsize(args.log)
+            tech_times = {tech: results[tech][0] for tech in techs}
+            plot_throughput(tech_times, file_size, title="Przepustowość GB/s", save_path="throughput_comparison.png")
+            print("[ALL] Wygenerowano wykres przepustowości: throughput_comparison.png")
+
+            # --- Wykres CPU vs GPU (OpenMP vs CUDA) ---
+            if 'OpenMP' in results and 'CUDA' in results:
+                plot_cpu_gpu_comparison(results['OpenMP'][0], results['CUDA'][0], title="Porównanie CPU vs GPU", save_path="cpu_vs_gpu.png")
+                print("[ALL] Wygenerowano wykres CPU vs GPU: cpu_vs_gpu.png")
 
 if __name__ == "__main__":
     main()

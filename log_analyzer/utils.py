@@ -70,3 +70,33 @@ def plot_stats_per_hour(stats, title="Events per hour", save_path=None):
         plt.savefig(save_path)
     else:
         plt.show()
+
+def plot_throughput(tech_times, file_size_bytes, title="Przepustowość GB/s", save_path=None):
+    """
+    tech_times: dict, np. {"OpenMP": 1.2, "MPI": 0.8, "CUDA": 0.5}
+    file_size_bytes: int
+    """
+    import matplotlib.pyplot as plt
+    techs = list(tech_times.keys())
+    times = [tech_times[t] for t in techs]
+    throughputs = [file_size_bytes / t / 1e9 for t in times]
+    plt.figure(figsize=(8,4))
+    plt.bar(techs, throughputs)
+    plt.title(title)
+    plt.ylabel('Przepustowość [GB/s]')
+    plt.xlabel('Technologia')
+    if save_path:
+        plt.savefig(save_path)
+    else:
+        plt.show()
+
+def plot_cpu_gpu_comparison(cpu_time, gpu_time, title="Porównanie CPU vs GPU", save_path=None):
+    import matplotlib.pyplot as plt
+    plt.figure(figsize=(6,4))
+    plt.bar(['CPU', 'GPU'], [cpu_time, gpu_time], color=['#1f77b4', '#ff7f0e'])
+    plt.ylabel('Czas [s]')
+    plt.title(title)
+    if save_path:
+        plt.savefig(save_path)
+    else:
+        plt.show()
